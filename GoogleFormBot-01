@@ -1,0 +1,98 @@
+javascript:(function(){
+alert('Colby is trash');
+void(navigator.my_note=prompt('Enter Password',''));
+if (navigator.my_note=="Pass"){
+  var style = document.createElement('style');
+  style.innerHTML = `
+.tooltip {
+  position: relative;
+  display: inline-block;
+  color:white;
+}
+.milk{
+  opacity: 10;
+  color:gray;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+  `;
+  document.head.insertBefore(style,null);
+/*document.body.style.background="Black";*/
+	var t1 = document.createTextNode("X");
+	var hint = document.createElement("div"); 
+	var x = document.createElement("div"); 
+	x.classList.add("tooltip");   
+	x.appendChild(t1);   
+	var t2 = document.createTextNode("This is an example of some notes");
+	var spawn = document.createElement("span");
+	spawn.classList.add("tooltiptext");
+	spawn.appendChild(t2);  
+	x.appendChild(spawn); 
+	hint.appendChild(x);	
+/*var doc = document.getElementsByClassName("freebirdFormviewerViewNoPadding");*/
+var doc = document.getElementsByClassName("freebirdFormviewerViewHeaderHeader exportHeader");
+/*var questions = document.getElementsByClassName("freebirdFormviewerComponentsQuestionBaseRoot");*/
+var questions = document.getElementsByClassName("freebirdFormviewerComponentsQuestionBaseHeader");
+var fontsize = doc[0].style.fontSize;
+var font =doc[0].style.font;
+var milk = document.createElement("div");
+var milkcon = document.createElement("div");
+var milklogo = document.createTextNode("Milk V1.0");
+milk.appendChild(milklogo);
+milk.classList.add("milk");
+milkcon.appendChild(milk);
+doc[0].innerHTML += milkcon.innerHTML;
+doc[0].style.fontSize=fontsize;
+doc[0].style.font=font;
+let funkyfunc = async function() {
+  let response = await fetch("https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=wat", {
+    "method": "GET",
+    "headers": {
+        "x-rapidapi-host": "mashape-community-urban-dictionary.p.rapidapi.com",
+        "x-rapidapi-key": "your urban dictionary key"
+    }
+  });
+  let text = await response.text();
+  let firstDefinitionText = JSON.parse(text)["list"][0]["definition"];
+  console.log(firstDefinitionText); /* or do something interesting with it*/
+};
+funkyfunc();
+for(var i = 0;i<questions.length;i++){
+	/*x.innerHTML=i;*/
+	questions[i].innerHTML = questions[i].innerHTML + hint.innerHTML;
+}
+alert('Correct!');  
+}else{
+window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+alert('Wrong');
+} })();
